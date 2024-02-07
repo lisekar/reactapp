@@ -1,7 +1,12 @@
-import React from 'react';
+import React , {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './App.css'
 import styles from './demo.module.css'
+import { render } from '@testing-library/react';
+import { BrowserRouter as Router, Route, NavLink, Switch, Link, Routes } from 'react-router-dom';
+import Home from './Home';
+import About from './About';
+import Notfound from './Notfound';
 // import Infofromapp from './App.js';
 
 // const myelement = React.createElement('h1',{},"Hi , React app");
@@ -227,3 +232,103 @@ import styles from './demo.module.css'
   
 
 // React redux
+
+//React forms
+
+// class Eventbind extends React.Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       userName: "",
+//       age: "",
+//       errorMsg: ""
+//     }
+//   }
+//   userValue = (event) => {
+//     let n = event.target.name;
+//     let v = event.target.value;
+//     let err = "";
+//     if (n === "age") {
+//       if (v !== "" && !Number(v)) {
+//         err = <strong>Invalid value, your age must be a number</strong>
+//       }
+//     }
+//     // this.setState({userName:event.target.value});/
+//     this.setState({ errorMsg: err })
+//     this.setState({ [n]: v })
+//   }
+//   formSubmit = (event) => {
+//     event.preventDefault();
+//     alert("your name " + this.state.userName);
+//   }
+//   render() {
+//     return (<div>
+//       <h1>Hello {this.state.userName}</h1>
+//       <form onSubmit={this.formSubmit}>
+//         <h2>Your Age : {this.state.age}</h2>
+//         Enter your name : <input type='text' name="userName" onChange={this.userValue} />
+//         <br />
+//         <br />
+//         Enter your Age : <input type='text' name="age" onChange={this.userValue} /> {this.state.errorMsg}
+//         <br />
+//         <br />
+//         <input type='submit' />
+//       </form>
+//     </div>)
+//   }
+// }
+// ReactDOM.render(<Eventbind />, document.getElementById("root"))
+
+// React hooks
+
+// function Reacthooks(){
+//   const [count, updatecount] = useState(0);
+//     return(
+//       <div>
+//         <p>You clicked the above button {count} times </p>
+//         <button type='button' onClick={()=>updatecount(count + 1)}>Click me !</button>
+//       </div>
+//     )
+// }
+// ReactDOM.render(<Reacthooks />, document.getElementById('root'));
+
+// function Reacthooks(){
+//   const [count, updatecount] = useState(0);
+//   useEffect(()=>{
+//     alert("You clicked " + count + " times");
+//   })
+//     return(
+//       <div>
+//         <p>You clicked the above button {count} times </p>
+//         <button type='button' onClick={()=>updatecount(count + 1)}>Click me !</button>
+//       </div>
+//     )
+// }
+
+// ReactDOM.render(<Reacthooks />, document.getElementById('root'));
+
+const routing = (
+  <Router>
+    <div>
+      <h1>React Routers</h1>
+      <ul>
+        <li><NavLink to="/" exact style={({ isActive }) => ({
+          color: isActive ? '#fff' : '#545e6f',
+          background: isActive ? '#7600dc' : '#f0f0f0',
+        })}>Home</NavLink></li>
+        <li><NavLink to="/About" exact style={({ isActive }) => ({
+          color: isActive ? '#fff' : '#545e6f',
+          background: isActive ? '#7600dc' : '#f0f0f0',
+        })}>About us</NavLink></li>
+      </ul>
+      <switch>
+        <Routes>
+          <Route exact path="/" Component={Home} />
+          <Route path="/about" Component={About} />
+          <Route path="*" Component={Notfound} />
+        </Routes>
+      </switch>
+    </div>
+  </Router>
+)
+ReactDOM.render(routing, document.getElementById('root'));
